@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Universal Byte-Level Encoding (UBE)</title>
+<meta name="description" content="Universal Byte-Level Encoding (NeurIPS 2026): UTF-8 where it is compact, UTF-16 where it is not. Lower cross-script disparity for BPE tokenizers, and up to one-third shorter inputs for byte-level models.">
+<link rel="canonical" href="https://samsung.github.io/universal-byte-level-encoding/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Universal Byte-Level Encoding: UTF-8/UTF-16 Routing to Reduce Cross-Script Token-Budget Disparities">
+<meta property="og:description" content="UTF-8 where it is compact, UTF-16 where it is not. Lower cross-script disparity for BPE tokenizers, and up to one-third shorter inputs for byte-level models. NeurIPS 2026.">
+<meta property="og:url" content="https://samsung.github.io/universal-byte-level-encoding/">
+<meta property="og:image" content="https://samsung.github.io/universal-byte-level-encoding/assets/ube_pipeline.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root {
+  --bg: #ffffff;
+  --text: #1f2328;
+  --muted: #59636e;
+  --line: #d1d9e0;
+  --soft: #f6f8fa;
+  --button: #0b2545;
+  --button-text: #ffffff;
+  --link: #0969da;
+  --stat: #4b44ce;
+  --figure-bg: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1117;
+    --text: #e6edf3;
+    --muted: #9198a1;
+    --line: #3d444d;
+    --soft: #151b23;
+    --button: #1d3a63;
+    --button-text: #ffffff;
+    --link: #4493f8;
+    --stat: #a9a4ff;
+    --figure-bg: #ffffff;
+  }
+}
+* { box-sizing: border-box; }
+@media (prefers-color-scheme: dark) {
+  .logo { box-sizing: content-box; padding: 8px 12px; background: #ffffff; border-radius: 10px; }
+}
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+main { max-width: 920px; margin: 0 auto; padding: 0 16px 48px; }
+header { text-align: center; padding: 48px 0 8px; }
+/* Official logos: NeurIPS above the title, the Samsung wordmark (with its own clear space) below the affiliation. */
+.logo { display: block; height: auto; margin: 0 auto; }
+.logo-neurips { width: 200px; margin-bottom: 20px; }
+.logo-samsung { width: 170px; margin-bottom: 18px; }
+h1 { margin: 0 auto 16px; max-width: 860px; font-size: clamp(25px, 6vw, 42px); line-height: 1.2; letter-spacing: -.01em; text-wrap: balance; }
+h1 .subtitle { display: block; margin-top: 6px; font-size: .62em; font-weight: 600; line-height: 1.3; text-wrap: balance; }
+.nowrap { white-space: nowrap; }
+.authors { margin: 0; font-size: 19px; }
+.affiliation { margin: 2px 0 6px; color: var(--muted); }
+.buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0 0 8px; }
+.buttons a {
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 999px;
+  background: var(--button); color: var(--button-text); font-weight: 600; font-size: 15px;
+}
+.buttons a:hover { text-decoration: none; opacity: .88; }
+.buttons svg { width: 18px; height: 18px; fill: currentColor; }
+.tagline { margin: 28px auto 0; max-width: 760px; text-align: center; font-size: 20px; text-wrap: balance; }
+.tagline strong { display: block; font-size: 23px; }
+figure { margin: 28px 0; }
+figure .frame { background: var(--figure-bg); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+figure img { display: block; width: 100%; height: auto; margin: 0 auto; }
+figure.narrow .frame { max-width: 680px; margin: 0 auto; }
+figcaption { margin: 10px auto 0; max-width: 820px; color: var(--muted); font-size: 15px; text-align: center; }
+h2 { margin: 48px 0 12px; padding-top: 8px; font-size: 26px; border-top: 1px solid var(--line); }
+h3 { margin: 32px 0 8px; font-size: 20px; }
+p { margin: 12px 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 20px 0; }
+.stat { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+.stat b { display: block; color: var(--stat); font-size: 28px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.stat span { display: block; margin-top: 4px; color: var(--muted); font-size: 14px; line-height: 1.45; }
+ul.points { padding-left: 20px; }
+ul.points li { margin: 8px 0; }
+.table-wrap { overflow-x: auto; margin: 20px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+th, td { padding: 7px 10px; border-bottom: 1px solid var(--line); }
+th { text-align: left; font-weight: 600; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+td.center, th.center { text-align: center; }
+.table-title { margin: 20px 0 -12px; color: var(--muted); font-size: 14px; }
+pre {
+  margin: 12px 0; padding: 14px 16px; overflow-x: auto; background: var(--soft); border: 1px solid var(--line);
+  border-radius: 10px; font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: .9em; }
+.bib { position: relative; }
+.bib button {
+  position: absolute; top: 8px; right: 8px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg); color: var(--text); font: 13px system-ui, sans-serif; cursor: pointer;
+}
+.faq details { margin: 10px 0; background: var(--soft); border: 1px solid var(--line); border-radius: 10px; }
+.faq summary { padding: 10px 16px; font-weight: 600; cursor: pointer; }
+.faq summary:hover { color: var(--link); }
+.faq .answer { padding: 0 16px 2px; border-top: 1px solid var(--line); }
+.faq .answer ul { padding-left: 20px; }
+footer { max-width: 920px; margin: 0 auto; padding: 24px 16px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; text-align: center; }
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  header { padding-top: 32px; }
+  .tagline { font-size: 18px; }
+  .tagline strong { font-size: 20px; }
+  figure .frame { padding: 8px; }
+  .buttons a { padding: 9px 14px; }
+}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <img class="logo logo-neurips" src="assets/neurips_logo.svg" width="200" height="90" alt="NeurIPS">
+  <h1>Universal Byte‑Level Encoding:
+    <span class="subtitle"><span class="nowrap">UTF-8/UTF-16</span> Routing to Reduce <span class="nowrap">Cross-Script</span>
+    <span class="nowrap">Token-Budget</span> Disparities</span></h1>
+  <p class="authors">Hyunsik Kim &nbsp;·&nbsp; Youngmoon Jung</p>
+  <p class="affiliation">Samsung Research</p>
+  <img class="logo logo-samsung" src="assets/samsung_wordmark.svg" width="170" height="45" alt="Samsung">
+  <nav class="buttons" aria-label="Paper links">
+    <a href="https://arxiv.org/abs/2610.01984"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75 1.5a.25.25 0 0 0-.25.25v12.5c0 .14.11.25.25.25h8.5a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 8 4.25V1.5H3.75zm5.75.56v2.19c0 .14.11.25.25.25h2.19L9.5 2.06zM2 1.75C2 .78 2.78 0 3.75 0h5.09c.46 0 .91.18 1.24.51l3.41 3.41c.33.33.51.78.51 1.24v9.09A1.75 1.75 0 0 1 12.25 16h-8.5A1.75 1.75 0 0 1 2 14.25V1.75z"/></svg>Paper</a>
+    <a href="https://github.com/Samsung/universal-byte-level-encoding"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.01 8.01 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8z"/></svg>Code</a>
+    <a href="https://neurips.cc/virtual/2026/loc/sydney/poster/152902"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.75 2.5a.25.25 0 0 0-.25.25v10.5c0 .14.11.25.25.25h12.5a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25H1.75zM0 2.75C0 1.78.78 1 1.75 1h12.5c.97 0 1.75.78 1.75 1.75v10.5A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25V2.75zm3 2a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 4.75zm0 3a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75zm0 3a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75z"/></svg>NeurIPS</a>
+    <a href="#faq"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>FAQ</a>
+    <a href="#citation"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2.75C2 1.78 2.78 1 3.75 1h8.5c.97 0 1.75.78 1.75 1.75v12.5a.75.75 0 0 1-1.15.63L8 13.1l-4.85 2.78A.75.75 0 0 1 2 15.25V2.75zm1.75-.25a.25.25 0 0 0-.25.25v11.2l4.1-2.35a.75.75 0 0 1 .75 0l4.15 2.38V2.75a.25.25 0 0 0-.25-.25h-8.5z"/></svg>BibTeX</a>
+  </nav>
+</header>
+
+<p class="tagline"><strong>UTF-8 where it is compact, UTF-16 where it is not.</strong>
+Lower cross-script disparity for BPE tokenizers, and up to one-third shorter inputs for byte-level models.</p>
+
+<figure>
+  <div class="frame"><img src="assets/ube_pipeline.png" width="1742" height="763"
+       alt="Base symbols for the text GPU性能 under UBE (7), BBPE (9) and BBPE16 (10)"></div>
+  <figcaption>UBE starts from 7 base symbols for “GPU性能” (GPU performance), compared with 9 for UTF-8 byte-level BPE (BBPE)
+  and 10 for UTF-16 BBPE16. UBE keeps ASCII in UTF-8 and writes each 3-byte BMP character as two UTF-16 bytes from a
+  separate alphabet.</figcaption>
+</figure>
+
+<h2 id="abstract">Abstract</h2>
+<p>Byte-level byte-pair encoding (BBPE) tokenizers are attractive for multilingual large language models because they
+cover all Unicode text. In UTF-8-based BBPE, however, many scripts start from a higher fallback cost than English: when
+no learned merges apply, a multibyte character requires multiple byte-derived symbols. We call this worst-case
+pre-merge cost the <em>encoding floor</em>. A higher floor can increase token counts and per-request cost and shrink
+usable context. Changing the whole text encoding can reduce this gap but can make already-efficient English spans more
+expensive in mixed-script text. We propose Universal Byte-Level Encoding (UBE), a dual-alphabet tokenizer that keeps
+1–2-byte UTF-8 characters in UTF-8 and routes 3–4-byte characters through UTF-16. This lowers the encoding floor for
+3-byte Basic Multilingual Plane characters, used by many scripts that need more tokens than English, without raising
+it for any character. UBE changes only the symbols presented to byte-pair encoding, and a Unicode 17 audit confirms
+exact round trips for every scalar value and every input in three official test suites. UBE also composes with other
+boundary policies and morphology-based encodings. Across intrinsic evaluations, UBE lowers dispersion in
+English-normalized token-count ratios (Gini 6–14% lower on FLORES-200 at 16K–64K), reducing cross-lingual
+token-budget disparity. In multilingual language models, UBE matches BBPE’s quality. In the main multilingual
+settings, UBE reduces token counts most where they are highest and also lowers English counts, yielding more usable
+context and faster prompt processing in content-matched benchmarks. Byte-level models benefit directly: UBE shortens
+their inputs by 29–33% in all 39 FLORES-200 languages written mostly in 3-byte characters (1.4–1.5 times as
+much text per context window), lowers byte-level Gini by 28%, and lengthens no input.</p>
+
+<h2 id="method">How UBE works</h2>
+<p>UBE is a byte representation for byte-level BPE that keeps BPE training and merges standard, and an input
+representation for training byte-level models. A character of one or two UTF-8 bytes keeps its UTF-8 bytes; a
+character of three or four UTF-8 bytes is written with the bytes of its UTF-16LE code units. The 3-byte characters of
+the Basic Multilingual Plane, used by CJK, Hangul, Indic, Thai, Ethiopic and many other scripts, therefore start from
+two base symbols instead of three, while ASCII keeps exactly the bytes it had.</p>
+
+<p class="table-title">Base symbols per character</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th></th><th class="center">1-byte UTF-8 (ASCII)</th><th class="center">2-byte UTF-8</th>
+    <th class="center">3-byte UTF-8 (BMP)</th><th class="center">4-byte UTF-8 (non-BMP)</th></tr></thead>
+  <tbody>
+    <tr><th>UBE</th><td class="center"><b>1</b></td><td class="center">2</td><td class="center"><b>2</b></td><td class="center">4</td></tr>
+    <tr><th>BBPE (UTF-8)</th><td class="center">1</td><td class="center">2</td><td class="center">3</td><td class="center">4</td></tr>
+    <tr><th>BBPE16 (UTF-16)</th><td class="center">2</td><td class="center">2</td><td class="center">2</td><td class="center">4</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>By design, UTF-8 is less compact for 3-byte BMP characters: a 3-byte sequence (<code>1110xxxx 10xxxxxx
+10xxxxxx</code>) spends 8 of its 24 bits on length and continuation markers that make UTF-8 self-synchronizing,
+leaving 16 code-point bits, which UTF-16 stores in 2 bytes.</p>
+
+<figure>
+  <div class="frame"><img src="assets/utf_bits.png" width="1534" height="622" loading="lazy"
+       alt="UTF-8 and UTF-16 bit layouts of the 1-, 2-, 3- and 4-byte UTF-8 classes, with UBE's route outlined"></div>
+  <figcaption>Bit layouts of each UTF-8 length class under UTF-8 and UTF-16, with code units drawn most significant bit
+  first (UBE writes them little-endian; surrogate pairs carry the code point minus 0x10000). UTF-16 saves a byte only
+  for 3-byte BMP code points.</figcaption>
+</figure>
+
+<p>These counts give the encoding floor: the base-symbol cost before BPE merging. With a 16K BBPE tokenizer trained on
+101 languages, a FLORES-200 sentence in the seven languages written in Tibetan, Myanmar, Ol Chiki or Tifinagh
+script takes 308.522 tokens on average and an English sentence 34.863, so the same context window holds only about
+one-ninth as much parallel text in these scripts as in English.</p>
+
+<h2 id="results">Results</h2>
+<h3>Tokenizers</h3>
+<div class="stats">
+  <div class="stat"><b>6–14%</b><span>lower token-premium Gini on FLORES-200 in all nine core settings <span class="nowrap">(16K–64K)</span></span></div>
+  <div class="stat"><b>29–34%</b><span>fewer tokens for Santali, Central Atlas Tamazight and Tibetan (101 languages, 16K)</span></div>
+  <div class="stat"><b>53%</b><span>more Santali text in a fixed token budget (101 languages, 32K)</span></div>
+  <div class="stat"><b>45.0%</b><span>higher prefill rate for Amharic in a content-matched benchmark (3.9% for English)</span></div>
+</div>
+<ul class="points">
+  <li><strong>Lower token-budget disparity.</strong> On FLORES-200 with tokenizers trained on 101 languages, the Gini
+  coefficient of English-normalized token premiums falls from 0.2183 to 0.1979 (−9.4%) at a 32K vocabulary, and UBE
+  uses fewer tokens in 189 of the 204 languages. The Gini is 6–14% lower in all nine core settings
+  (English-only, 6-language and 101-language training at 16K, 32K and 64K), and with the 101-language 32K tokenizers
+  it also falls on the UDHR public-text stress test (−11.1%) and SIB-200, a topic-labeled subset of FLORES-200
+  (−8.5%).</li>
+  <li><strong>Fewer tokens where they cost most.</strong> With 101-language 16K tokenizers, Santali (Ol Chiki), Central
+  Atlas Tamazight (Tifinagh) and Tibetan need 29–34% fewer tokens. English needs fewer tokens too, at every tested
+  vocabulary size in the paper’s multilingual settings.</li>
+  <li><strong>More text for the same budget.</strong> Under a fixed token budget, Santali (Ol Chiki) fits 53% more
+  text with 101-language 32K tokenizers, and English 0.3% more. In a content-matched prompt-processing benchmark with
+  a 182M-parameter model and 6-language 32K tokenizers, the full-model prefill rate rises by 45.0% for Amharic and by
+  3.9% for English.</li>
+  <li><strong>Robust to the training mixture.</strong> With 30 GiB mC4 tokenizer-training mixtures that emulate <span class="nowrap">GPT-4o</span>,
+  Mistral NeMo and a Chinese-centric scenario, UBE uses 1.9–4.6% fewer tokens, lowers Other BMP tokens by 12.5–25.3%
+  and the token-premium Gini by 5.5–11.7% in every pair, from 32K up to 200K vocabularies. English tokens fall in
+  every pair as well, by up to 0.11%.</li>
+  <li><strong>Same language-model quality.</strong> In matched multilingual language-model experiments from 182M to
+  1.3B parameters and 32K to 128K vocabularies, UBE matches BBPE’s quality.</li>
+  <li><strong>Exact, with standard BPE.</strong> Every Unicode 17 scalar value round-trips exactly. BPE training and
+  merges are standard, and the routing needs no language identification or script table.</li>
+  <li><strong>Composable.</strong> UBE changes only the byte representation, so it composes with SuperBPE-style and
+  SCRIPT-style boundary policies and MYTE’s morphology maps while preserving those components. With 32K tokenizers
+  trained on the primary 101-language corpus, the Gini falls from 0.1922 to 0.1725 with SuperBPE-style boundaries and
+  from 0.2036 to 0.1824 with SCRIPT-style boundaries.</li>
+</ul>
+
+<figure class="narrow">
+  <div class="frame"><img src="assets/gini_vs_tokens.png" width="1200" height="918" loading="lazy"
+       alt="Token-premium Gini against total FLORES-200 tokens for UBE, BBPE and public LLM tokenizers"></div>
+  <figcaption>FLORES-200 token-premium Gini against total tokens (lower left is better). The UBE and BBPE curves use the
+  same primary 101-language mC4 training corpus at 16K to 256K vocabularies. Stars mark public LLM tokenizers evaluated
+  on the same FLORES-200 text.</figcaption>
+</figure>
+
+<p class="table-title">Mean tokens per sentence on FLORES-200 (101-language tokenizers, 32K)</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Language</th><th class="num">UBE</th><th class="num">BBPE</th><th class="num">Change</th></tr></thead>
+  <tbody>
+    <tr><td>Santali (Ol Chiki)</td><td class="num"><b>222.944</b></td><td class="num">341.287</td><td class="num">−34.7%</td></tr>
+    <tr><td>Central Atlas Tamazight (Tifinagh)</td><td class="num"><b>183.305</b></td><td class="num">269.166</td><td class="num">−31.9%</td></tr>
+    <tr><td>Tibetan</td><td class="num"><b>286.737</b></td><td class="num">336.804</td><td class="num">−14.9%</td></tr>
+    <tr><td>Arabic</td><td class="num"><b>60.407</b></td><td class="num">60.600</td><td class="num">−0.3%</td></tr>
+    <tr><td>English</td><td class="num"><b>31.068</b></td><td class="num">31.160</td><td class="num">−0.3%</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Byte-level models</h3>
+<div class="stats">
+  <div class="stat"><b>29–33%</b><span>shorter inputs in all 39 languages written mostly in 3-byte characters</span></div>
+  <div class="stat"><b>1.41–1.50×</b><span>as much of this text in the same context window</span></div>
+  <div class="stat"><b>202/204</b><span>FLORES-200 languages with shorter inputs; the other two tie, none is longer</span></div>
+  <div class="stat"><b>−28%</b><span>byte-level Gini (0.2077 → 0.1500)</span></div>
+</div>
+<ul class="points">
+  <li><strong>Shorter inputs in more languages.</strong> A byte-level model uses one input position per base symbol. On
+  FLORES-200, UBE shortens the inputs of 202 of the 204 languages, ties the other two and lengthens none (189 languages use
+  fewer tokens with the 101-language 32K BPE tokenizer).</li>
+  <li><strong>Large gains for 3-byte scripts.</strong> In the 39 languages written mostly in 3-byte characters,
+  mean inputs are 29–33% shorter, so the same context window holds 1.41–1.50 times as much of this text.</li>
+  <li><strong>Lower disparity.</strong> The Gini coefficient of English-normalized premiums falls from 0.2077 to 0.1500,
+  a 28% reduction, more than the 6–14% of the paper’s core BPE settings.</li>
+  <li><strong>English is shorter too.</strong> The English mean is 0.04% lower: ASCII keeps one symbol per character,
+  and 3-byte characters such as em dashes and curly quotes, 0.037% of FLORES-200 English, take two symbols instead of
+  three.</li>
+  <li><strong>Composes with MYTE.</strong> MYTE-UBE preserves MYTE’s morphology maps and decoded output while using
+  4.58% fewer base-symbol positions on FLORES-200: 201 of the 204 languages have shorter inputs and the other three are
+  tied.</li>
+  <li><strong>The right byte first.</strong> UBE writes the low byte first, so the first symbol of a 3-byte BMP
+  character already identifies it among the 256 code points that share its high byte. This matters for hierarchical
+  byte-level models that cut patches with a learned boundary predictor. In
+  <a href="https://arxiv.org/abs/2610.22071">The Right Byte First: How UTF-16 Helps Multilingual Boundary
+  Prediction</a>, small causal predictors with one-symbol lookahead reach 0.06% balanced grapheme-boundary error at
+  code point boundaries on UBE input, versus 8.76% on UTF-8 and 8.62% on a big-endian variant of the same length,
+  across 17 languages in 13 Brahmic scripts, which implicates byte order beyond the shorter input alone.</li>
+</ul>
+
+<figure class="narrow">
+  <div class="frame"><img src="assets/byte_level_savings.png" width="1200" height="955" loading="lazy"
+       alt="Input positions UBE saves against UTF-8 bytes for each FLORES-200 language"></div>
+  <figcaption>Input positions UBE saves against UTF-8 bytes for each of the 204 FLORES-200 languages, before BPE
+  merging. The 39 languages with at least half their characters encoded as 3 UTF-8 bytes have 29–33% shorter
+  mean inputs, close to the one-third limit.</figcaption>
+</figure>
+
+<p class="table-title">Mean base symbols per sentence on FLORES-200 (no merges)</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Languages</th><th class="num">UBE</th><th class="num">UTF-8 bytes</th><th class="num">Change</th></tr></thead>
+  <tbody>
+    <tr><td>CJK (5 languages)</td><td class="num"><b>91.252</b></td><td class="num">133.665</td><td class="num">−31.73%</td></tr>
+    <tr><td>Other BMP (7 languages)</td><td class="num"><b>277.056</b></td><td class="num">406.632</td><td class="num">−31.87%</td></tr>
+    <tr><td>All 204 languages</td><td class="num"><b>176.088</b></td><td class="num">196.106</td><td class="num">−10.21%</td></tr>
+    <tr><td>English</td><td class="num"><b>130.481</b></td><td class="num">130.530</td><td class="num">−0.04%</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="faq">FAQ</h2>
+<p>Answers to common questions, drawn from the paper. Unless noted otherwise, sequence-length results are on FLORES-200
+devtest (1,012 parallel sentences in each of 204 language–script pairs, hereafter languages), and BPE comparisons use
+tokenizers trained on mC4 text. A token premium is a language’s mean tokens per sentence divided by English’s under
+the same tokenizer; FLORES-200 Gini uses the 203 non-English premiums.</p>
+<div class="faq">
+<details>
+<summary>Is decoding exact?</summary>
+<div class="answer">
+<p>Yes. The paper proves exact round-trip decoding, and all 204 FLORES-200 languages decode without a failure. An
+exhaustive Unicode 17 audit covers every scalar value and the official normalization, grapheme-break and emoji test
+suites, and UBE recovers every input. The audit is included in <a href="https://github.com/Samsung/universal-byte-level-encoding/blob/main/paper/README.md"><code>paper/</code></a>.</p>
+</div>
+</details>
+<details>
+<summary>Why not use UTF-16 for everything?</summary>
+<div class="answer">
+<p>UTF-16 writes every ASCII character as two bytes, doubling the base-symbol cost of ASCII text in English, code, digits
+and markup. UBE keeps ASCII at one symbol and gives 3-byte BMP characters two. In the figure above, “GPU性能”
+starts from 7 base symbols with UBE, 9 with UTF-8 BBPE and 10 with UTF-16 BBPE16.</p>
+</div>
+</details>
+<details>
+<summary>What changes in BPE training or in the model?</summary>
+<div class="answer">
+<p>UBE changes the byte representation used to train a new tokenizer. The base alphabet is the 512-symbol union of the
+two byte alphabets; pair counting and merge selection are standard BPE, with no script-aware merge rule. Each tokenizer
+is saved as a Hugging Face <code>tokenizer.json</code>, and models trained with it use an ordinary Transformer architecture.</p>
+</div>
+</details>
+<details>
+<summary>Does UBE change English token counts?</summary>
+<div class="answer">
+<p>English needs fewer tokens too. With multilingual tokenizer training (the paper’s 6-language and 101-language
+settings), English token counts are lower at every tested vocabulary size; with the 101-language 32K tokenizer they
+fall from 31.160 to 31.068 tokens per sentence. English is also lower in all ten pairs of the emulated commercial
+mixtures above. UBE leaves the ASCII base stream unchanged; English counts fall because 3-byte characters take two
+base symbols, so BPE spends fewer merges on them and more on ASCII subwords. A routed BMP character can be completed by
+one merge where BBPE needs two, and across the eight 6-language and 101-language settings, UBE spends 505–684 fewer
+merges on 3- and 4-byte characters and partial characters and gains mostly ASCII-only subwords (214–370 more).
+Byte-level English inputs are 0.04% shorter as well: 3-byte characters such as em dashes and curly quotes, 0.037% of
+the characters in FLORES-200 English, take 2 symbols instead of 3.</p>
+</div>
+</details>
+<details>
+<summary>Can UBE be combined with SuperBPE or SCRIPT-BPE?</summary>
+<div class="answer">
+<p>Yes. UBE changes only the byte representation, so it composes with boundary policies. With 32K tokenizers trained on
+the primary 101-language corpus and SuperBPE-style boundaries applied to both, UBE lowers Gini relative to BBPE from
+0.1922 to 0.1725; with SCRIPT-style boundaries, from 0.2036 to 0.1824. In both cases UBE also uses fewer tokens.</p>
+</div>
+</details>
+<details>
+<summary>Does any language get longer at the byte level?</summary>
+<div class="answer">
+<p>No. Inputs are shorter in 202 of the 204 languages, and the other two, Catalan and Central Kurdish, are tied because their
+devtest text has no 3-byte character.</p>
+</div>
+</details>
+<details>
+<summary>How does UBE affect language-model quality?</summary>
+<div class="answer">
+<p>In the main multilingual experiments, where the corpus, architecture, optimizer and token-step budget are fixed and
+only the tokenizer changes, UBE matches BBPE’s quality, and checks at 230M/64K, 329M/128K and 1.3B/32K agree. A separate
+comparison uses five 32K tokenizers (UBE, BBPE, BBPE16, MYTE+BPE and SCRIPT-BPE) trained on approximately 50 MiB of mC4
+text per language across 101 languages. With 182M-parameter models and matched supervised UTF-8 byte
+exposure, UBE has the lowest bits-per-byte (BPB) Gini and the highest multilingual and English benchmark-group means,
+with benchmarks weighted equally within each group.</p>
+</div>
+</details>
+<details>
+<summary>Where is UBE most useful?</summary>
+<div class="answer">
+<ul>
+<li>Compact vocabularies of 16K–64K, for example in on-device models.</li>
+<li>Low-coverage scripts written in 3-byte BMP characters, which stay near the encoding floor.</li>
+<li>Byte-level models, which learn no merges.</li>
+</ul>
+<p>Under commercial-style training mixtures, the Other BMP and Gini reductions persist up to 200K.</p>
+</div>
+</details>
+</div>
+<p>More questions are answered in the <a href="https://github.com/Samsung/universal-byte-level-encoding#faq">FAQ of the repository README</a>.</p>
+
+<h2 id="code">Code</h2>
+<p>The <a href="https://github.com/Samsung/universal-byte-level-encoding">repository</a> is Hugging Face
+<a href="https://github.com/huggingface/tokenizers"><code>tokenizers</code></a> v0.23.3 with UBE, together with the
+paper’s FLORES-200, Unicode and MYTE-UBE analyses. Use Python 3.10 or newer and a
+<a href="https://rustup.rs">Rust toolchain</a> to build from source, in a fresh virtual environment:</p>
+<pre><code>python -m venv .venv
+source .venv/bin/activate
+pip install "git+https://github.com/Samsung/universal-byte-level-encoding@v0.23.3-ube.2#subdirectory=bindings/python"</code></pre>
+<pre><code>from tokenizers.implementations import UniversalByteLevelBPETokenizer
+
+tokenizer = UniversalByteLevelBPETokenizer()
+tokenizer.train(
+    files=["corpus.txt"],
+    vocab_size=32000,
+    min_frequency=2,
+    special_tokens=["&lt;s&gt;", "&lt;pad&gt;", "&lt;/s&gt;", "&lt;unk&gt;", "&lt;mask&gt;"],
+)
+tokenizer.save("tokenizer.json")
+
+encoding = tokenizer.encode("Hello 世界")
+assert tokenizer.decode(encoding.ids) == "Hello 世界"</code></pre>
+
+<h2 id="citation">Citation</h2>
+<div class="bib">
+<button type="button" data-copy="bib-ube">Copy</button>
+<pre id="bib-ube"><code>@inproceedings{kim2026ube,
+  title     = {Universal Byte-Level Encoding: {UTF-8}/{UTF-16} Routing to Reduce Cross-Script Token-Budget Disparities},
+  author    = {Kim, Hyunsik and Jung, Youngmoon},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {39},
+  year      = {2026},
+  url       = {https://arxiv.org/abs/2610.01984}
+}</code></pre>
+</div>
+<p>For UBE with byte-level models and boundary prediction, please also cite:</p>
+<div class="bib">
+<button type="button" data-copy="bib-rbf">Copy</button>
+<pre id="bib-rbf"><code>@article{kim2026rbf,
+  title   = {The Right Byte First: How {UTF}-16 Helps Multilingual Boundary Prediction},
+  author  = {Kim, Hyunsik},
+  journal = {arXiv preprint arXiv:2610.22071},
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2610.22071}
+}</code></pre>
+</div>
+</main>
+
+<footer>
+  <p>Hyunsik Kim and Youngmoon Jung, Samsung Research ·
+  <a href="https://github.com/Samsung/universal-byte-level-encoding">Code</a> ·
+  <a href="https://arxiv.org/abs/2610.01984">arXiv</a></p>
+  <p>Copyright 2026 Samsung Electronics Co., Ltd.</p>
+</footer>
+
+<script>
+document.querySelectorAll("button[data-copy]").forEach(function (button) {
+  button.addEventListener("click", function () {
+    var text = document.getElementById(button.dataset.copy).innerText;
+    var done = function () {
+      button.textContent = "Copied";
+      setTimeout(function () { button.textContent = "Copy"; }, 1500);
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done);
+    } else {
+      var area = document.createElement("textarea");
+      area.value = text;
+      document.body.appendChild(area);
+      area.select();
+      try { document.execCommand("copy"); done(); } finally { document.body.removeChild(area); }
+    }
+  });
+});
+</script>
+</body>
+</html>
