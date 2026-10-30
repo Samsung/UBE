@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Universal Byte-Level Encoding (UBE)</title>
 <meta name="description" content="Universal Byte-Level Encoding (NeurIPS 2026): UTF-8 where it is compact, UTF-16 where it is not. Lower cross-script disparity for BPE tokenizers, and up to one-third shorter inputs for byte-level models.">
-<link rel="canonical" href="https://samsung.github.io/universal-byte-level-encoding/">
+<link rel="canonical" href="https://samsung.github.io/UBE/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Universal Byte-Level Encoding: UTF-8/UTF-16 Routing to Reduce Cross-Script Token-Budget Disparities">
 <meta property="og:description" content="UTF-8 where it is compact, UTF-16 where it is not. Lower cross-script disparity for BPE tokenizers, and up to one-third shorter inputs for byte-level models. NeurIPS 2026.">
-<meta property="og:url" content="https://samsung.github.io/universal-byte-level-encoding/">
-<meta property="og:image" content="https://samsung.github.io/universal-byte-level-encoding/assets/ube_pipeline.png">
+<meta property="og:url" content="https://samsung.github.io/UBE/">
+<meta property="og:image" content="https://samsung.github.io/UBE/assets/ube_pipeline.png">
 <meta name="twitter:card" content="summary_large_image">
 <style>
 :root {
@@ -131,7 +131,7 @@ footer { max-width: 920px; margin: 0 auto; padding: 24px 16px 40px; border-top: 
   <img class="logo logo-samsung" src="assets/samsung_wordmark.svg" width="170" height="45" alt="Samsung">
   <nav class="buttons" aria-label="Paper links">
     <a href="https://arxiv.org/abs/2610.01984"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.75 1.5a.25.25 0 0 0-.25.25v12.5c0 .14.11.25.25.25h8.5a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 8 4.25V1.5H3.75zm5.75.56v2.19c0 .14.11.25.25.25h2.19L9.5 2.06zM2 1.75C2 .78 2.78 0 3.75 0h5.09c.46 0 .91.18 1.24.51l3.41 3.41c.33.33.51.78.51 1.24v9.09A1.75 1.75 0 0 1 12.25 16h-8.5A1.75 1.75 0 0 1 2 14.25V1.75z"/></svg>Paper</a>
-    <a href="https://github.com/Samsung/universal-byte-level-encoding"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.01 8.01 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8z"/></svg>Code</a>
+    <a href="https://github.com/Samsung/UBE"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.01 8.01 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8z"/></svg>Code</a>
     <a href="https://neurips.cc/virtual/2026/loc/sydney/poster/152902"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.75 2.5a.25.25 0 0 0-.25.25v10.5c0 .14.11.25.25.25h12.5a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25H1.75zM0 2.75C0 1.78.78 1 1.75 1h12.5c.97 0 1.75.78 1.75 1.75v10.5A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25V2.75zm3 2a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 4.75zm0 3a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75zm0 3a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75z"/></svg>NeurIPS</a>
     <a href="#faq"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>FAQ</a>
     <a href="#citation"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2.75C2 1.78 2.78 1 3.75 1h8.5c.97 0 1.75.78 1.75 1.75v12.5a.75.75 0 0 1-1.15.63L8 13.1l-4.85 2.78A.75.75 0 0 1 2 15.25V2.75zm1.75-.25a.25.25 0 0 0-.25.25v11.2l4.1-2.35a.75.75 0 0 1 .75 0l4.15 2.38V2.75a.25.25 0 0 0-.25-.25h-8.5z"/></svg>BibTeX</a>
@@ -325,7 +325,7 @@ the same tokenizer; FLORES-200 Gini uses the 203 non-English premiums.</p>
 <div class="answer">
 <p>Yes. The paper proves exact round-trip decoding, and all 204 FLORES-200 languages decode without a failure. An
 exhaustive Unicode 17 audit covers every scalar value and the official normalization, grapheme-break and emoji test
-suites, and UBE recovers every input. The audit is included in <a href="https://github.com/Samsung/universal-byte-level-encoding/blob/main/paper/README.md"><code>paper/</code></a>.</p>
+suites, and UBE recovers every input. The audit is included in <a href="https://github.com/Samsung/UBE/blob/main/paper/README.md"><code>paper/</code></a>.</p>
 </div>
 </details>
 <details>
@@ -396,16 +396,16 @@ with benchmarks weighted equally within each group.</p>
 </div>
 </details>
 </div>
-<p>More questions are answered in the <a href="https://github.com/Samsung/universal-byte-level-encoding#faq">FAQ of the repository README</a>.</p>
+<p>More questions are answered in the <a href="https://github.com/Samsung/UBE#faq">FAQ of the repository README</a>.</p>
 
 <h2 id="code">Code</h2>
-<p>The <a href="https://github.com/Samsung/universal-byte-level-encoding">repository</a> is Hugging Face
+<p>The <a href="https://github.com/Samsung/UBE">repository</a> is Hugging Face
 <a href="https://github.com/huggingface/tokenizers"><code>tokenizers</code></a> v0.23.3 with UBE, together with the
 paper’s FLORES-200, Unicode and MYTE-UBE analyses. Use Python 3.10 or newer and a
 <a href="https://rustup.rs">Rust toolchain</a> to build from source, in a fresh virtual environment:</p>
 <pre><code>python -m venv .venv
 source .venv/bin/activate
-pip install "git+https://github.com/Samsung/universal-byte-level-encoding@v0.23.3-ube.2#subdirectory=bindings/python"</code></pre>
+pip install "git+https://github.com/Samsung/UBE@v0.23.3-ube.2#subdirectory=bindings/python"</code></pre>
 <pre><code>from tokenizers.implementations import UniversalByteLevelBPETokenizer
 
 tokenizer = UniversalByteLevelBPETokenizer()
@@ -447,7 +447,7 @@ assert tokenizer.decode(encoding.ids) == "Hi 빙고 🩷💚"</code></pre>
 
 <footer>
   <p>Hyunsik Kim and Youngmoon Jung, Samsung Research ·
-  <a href="https://github.com/Samsung/universal-byte-level-encoding">Code</a> ·
+  <a href="https://github.com/Samsung/UBE">Code</a> ·
   <a href="https://arxiv.org/abs/2610.01984">arXiv</a></p>
   <p>Copyright 2026 Samsung Electronics Co., Ltd.</p>
 </footer>
