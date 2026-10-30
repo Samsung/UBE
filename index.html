@@ -142,11 +142,11 @@ footer { max-width: 920px; margin: 0 auto; padding: 24px 16px 40px; border-top: 
 Lower cross-script disparity for BPE tokenizers, and up to one-third shorter inputs for byte-level models.</p>
 
 <figure>
-  <div class="frame"><img src="assets/ube_pipeline.png" width="1742" height="763"
-       alt="Base symbols for the text GPU性能 under UBE (7), BBPE (9) and BBPE16 (10)"></div>
-  <figcaption>UBE starts from 7 base symbols for “GPU性能” (GPU performance), compared with 9 for UTF-8 byte-level BPE (BBPE)
-  and 10 for UTF-16 BBPE16. UBE keeps ASCII in UTF-8 and writes each 3-byte BMP character as two UTF-16 bytes from a
-  separate alphabet.</figcaption>
+  <div class="frame"><img src="assets/ube_pipeline.png" width="1738" height="760"
+       alt="Base symbols for the text Hi 빙고 under UBE (7), BBPE (9) and BBPE16 (10)"></div>
+  <figcaption>UBE starts from 7 base symbols for <span class="nowrap">“Hi 빙고”</span>, compared with 9 for UTF-8
+  byte-level BPE (BBPE) and 10 for UTF-16 BBPE16. UBE keeps ASCII in UTF-8 and writes each 3-byte BMP character as two
+  UTF-16 bytes from a separate alphabet.</figcaption>
 </figure>
 
 <h2 id="abstract">Abstract</h2>
@@ -332,7 +332,7 @@ suites, and UBE recovers every input. The audit is included in <a href="https://
 <summary>Why not use UTF-16 for everything?</summary>
 <div class="answer">
 <p>UTF-16 writes every ASCII character as two bytes, doubling the base-symbol cost of ASCII text in English, code, digits
-and markup. UBE keeps ASCII at one symbol and gives 3-byte BMP characters two. In the figure above, “GPU性能”
+and markup. UBE keeps ASCII at one symbol and gives 3-byte BMP characters two. In the figure above, <span class="nowrap">“Hi 빙고”</span>
 starts from 7 base symbols with UBE, 9 with UTF-8 BBPE and 10 with UTF-16 BBPE16.</p>
 </div>
 </details>
