@@ -1,0 +1,1300 @@
+{
+  "alphabet": {
+    "myte": 256,
+    "myte_ube": 512,
+    "ube": 512,
+    "utf8_bytes": 256
+  },
+  "dataset": {
+    "configurations": 204,
+    "sentences": 206448,
+    "sha256": "7531e9dba100c513db3acc12a4071bf29b7d94ef580e452e7504bdd4b97ff5d4"
+  },
+  "myte": {
+    "commit": "177299ca7278a3618b8c77588e6dcd3912bad428",
+    "decompose_map_sha256": "0188cb149c3b1d7ea49c895f8852147618ec97e19c439b500b8517bec2ccf88f",
+    "expected_commit": "177299ca7278a3618b8c77588e6dcd3912bad428",
+    "implementation_sha256": "24454728cc5d0ca5207823d2a3d43507de8546df691ebaf5ec97a06c99e53ddd",
+    "merge_map_sha256": "f321bfd2381905bd95ae22842ec804cfa9f8a620baded3c073cd1d0642f93cb7",
+    "repository": "https://github.com/tomlimi/MYTE"
+  },
+  "myte_ube_vs_myte": {
+    "cjk_change": -0.24076265030814947,
+    "configurations_higher": 0,
+    "configurations_lower": 201,
+    "configurations_tied": 3,
+    "other_bmp_change": -0.2912908290366032,
+    "total_positions_change": -0.04581619108700741
+  },
+  "per_language": {
+    "ace_Arab": {
+      "myte": 155831,
+      "myte_ube": 155582,
+      "ube": 199633,
+      "utf8_bytes": 199884
+    },
+    "ace_Latn": {
+      "myte": 135827,
+      "myte_ube": 135746,
+      "ube": 144374,
+      "utf8_bytes": 144457
+    },
+    "acm_Arab": {
+      "myte": 140697,
+      "myte_ube": 140692,
+      "ube": 206407,
+      "utf8_bytes": 206412
+    },
+    "acq_Arab": {
+      "myte": 143662,
+      "myte_ube": 143657,
+      "ube": 209280,
+      "utf8_bytes": 209285
+    },
+    "aeb_Arab": {
+      "myte": 139444,
+      "myte_ube": 139440,
+      "ube": 203519,
+      "utf8_bytes": 203523
+    },
+    "afr_Latn": {
+      "myte": 124826,
+      "myte_ube": 124198,
+      "ube": 140662,
+      "utf8_bytes": 141292
+    },
+    "ajp_Arab": {
+      "myte": 134111,
+      "myte_ube": 134085,
+      "ube": 196827,
+      "utf8_bytes": 196853
+    },
+    "aka_Latn": {
+      "myte": 142505,
+      "myte_ube": 141260,
+      "ube": 144655,
+      "utf8_bytes": 145900
+    },
+    "als_Latn": {
+      "myte": 136209,
+      "myte_ube": 136205,
+      "ube": 158502,
+      "utf8_bytes": 158506
+    },
+    "amh_Ethi": {
+      "myte": 139292,
+      "myte_ube": 114701,
+      "ube": 156298,
+      "utf8_bytes": 225450
+    },
+    "apc_Arab": {
+      "myte": 133342,
+      "myte_ube": 133340,
+      "ube": 195906,
+      "utf8_bytes": 195910
+    },
+    "arb_Arab": {
+      "myte": 145945,
+      "myte_ube": 145940,
+      "ube": 211258,
+      "utf8_bytes": 211263
+    },
+    "arb_Latn": {
+      "myte": 146677,
+      "myte_ube": 146660,
+      "ube": 153805,
+      "utf8_bytes": 153824
+    },
+    "ars_Arab": {
+      "myte": 146147,
+      "myte_ube": 146142,
+      "ube": 211537,
+      "utf8_bytes": 211542
+    },
+    "ary_Arab": {
+      "myte": 142066,
+      "myte_ube": 142063,
+      "ube": 206139,
+      "utf8_bytes": 206142
+    },
+    "arz_Arab": {
+      "myte": 140910,
+      "myte_ube": 140908,
+      "ube": 206496,
+      "utf8_bytes": 206500
+    },
+    "asm_Beng": {
+      "myte": 210784,
+      "myte_ube": 176191,
+      "ube": 230507,
+      "utf8_bytes": 335062
+    },
+    "ast_Latn": {
+      "myte": 124392,
+      "myte_ube": 123597,
+      "ube": 140300,
+      "utf8_bytes": 141102
+    },
+    "awa_Deva": {
+      "myte": 163956,
+      "myte_ube": 150305,
+      "ube": 229364,
+      "utf8_bytes": 330548
+    },
+    "ayr_Latn": {
+      "myte": 134539,
+      "myte_ube": 134272,
+      "ube": 141611,
+      "utf8_bytes": 141878
+    },
+    "azb_Arab": {
+      "myte": 138733,
+      "myte_ube": 138721,
+      "ube": 215037,
+      "utf8_bytes": 215049
+    },
+    "azj_Latn": {
+      "myte": 130564,
+      "myte_ube": 130556,
+      "ube": 166536,
+      "utf8_bytes": 166544
+    },
+    "bak_Cyrl": {
+      "myte": 168401,
+      "myte_ube": 168131,
+      "ube": 244933,
+      "utf8_bytes": 245203
+    },
+    "bam_Latn": {
+      "myte": 133987,
+      "myte_ube": 133983,
+      "ube": 137562,
+      "utf8_bytes": 137566
+    },
+    "ban_Latn": {
+      "myte": 127518,
+      "myte_ube": 127506,
+      "ube": 145942,
+      "utf8_bytes": 145954
+    },
+    "bel_Cyrl": {
+      "myte": 157370,
+      "myte_ube": 157223,
+      "ube": 270747,
+      "utf8_bytes": 270895
+    },
+    "bem_Latn": {
+      "myte": 147871,
+      "myte_ube": 147691,
+      "ube": 160961,
+      "utf8_bytes": 161141
+    },
+    "ben_Beng": {
+      "myte": 146704,
+      "myte_ube": 136334,
+      "ube": 236868,
+      "utf8_bytes": 344682
+    },
+    "bho_Deva": {
+      "myte": 170274,
+      "myte_ube": 157218,
+      "ube": 228584,
+      "utf8_bytes": 328554
+    },
+    "bjn_Arab": {
+      "myte": 164003,
+      "myte_ube": 163938,
+      "ube": 223443,
+      "utf8_bytes": 223508
+    },
+    "bjn_Latn": {
+      "myte": 122218,
+      "myte_ube": 122118,
+      "ube": 138311,
+      "utf8_bytes": 138411
+    },
+    "bod_Tibt": {
+      "myte": 438988,
+      "myte_ube": 293624,
+      "ube": 293592,
+      "utf8_bytes": 439025
+    },
+    "bos_Latn": {
+      "myte": 122651,
+      "myte_ube": 122466,
+      "ube": 135686,
+      "utf8_bytes": 135871
+    },
+    "bug_Latn": {
+      "myte": 131789,
+      "myte_ube": 131364,
+      "ube": 143181,
+      "utf8_bytes": 143606
+    },
+    "bul_Cyrl": {
+      "myte": 138700,
+      "myte_ube": 138422,
+      "ube": 250300,
+      "utf8_bytes": 250578
+    },
+    "cat_Latn": {
+      "myte": 129236,
+      "myte_ube": 129236,
+      "ube": 148814,
+      "utf8_bytes": 148814
+    },
+    "ceb_Latn": {
+      "myte": 145563,
+      "myte_ube": 145550,
+      "ube": 158726,
+      "utf8_bytes": 158739
+    },
+    "ces_Latn": {
+      "myte": 125574,
+      "myte_ube": 125372,
+      "ube": 142213,
+      "utf8_bytes": 142415
+    },
+    "cjk_Latn": {
+      "myte": 130072,
+      "myte_ube": 129928,
+      "ube": 139632,
+      "utf8_bytes": 139776
+    },
+    "ckb_Arab": {
+      "myte": 194740,
+      "myte_ube": 194740,
+      "ube": 236367,
+      "utf8_bytes": 236367
+    },
+    "crh_Latn": {
+      "myte": 131648,
+      "myte_ube": 131611,
+      "ube": 147328,
+      "utf8_bytes": 147365
+    },
+    "cym_Latn": {
+      "myte": 130649,
+      "myte_ube": 130644,
+      "ube": 141792,
+      "utf8_bytes": 141797
+    },
+    "dan_Latn": {
+      "myte": 117962,
+      "myte_ube": 117947,
+      "ube": 137969,
+      "utf8_bytes": 137988
+    },
+    "deu_Latn": {
+      "myte": 134361,
+      "myte_ube": 134201,
+      "ube": 156196,
+      "utf8_bytes": 156358
+    },
+    "dik_Latn": {
+      "myte": 126308,
+      "myte_ube": 126289,
+      "ube": 126342,
+      "utf8_bytes": 126363
+    },
+    "dyu_Latn": {
+      "myte": 137036,
+      "myte_ube": 136888,
+      "ube": 141422,
+      "utf8_bytes": 141570
+    },
+    "dzo_Tibt": {
+      "myte": 478056,
+      "myte_ube": 320705,
+      "ube": 320739,
+      "utf8_bytes": 478120
+    },
+    "ell_Grek": {
+      "myte": 187009,
+      "myte_ube": 186999,
+      "ube": 287211,
+      "utf8_bytes": 287221
+    },
+    "eng_Latn": {
+      "myte": 110450,
+      "myte_ube": 110403,
+      "ube": 132047,
+      "utf8_bytes": 132096
+    },
+    "epo_Latn": {
+      "myte": 116431,
+      "myte_ube": 116358,
+      "ube": 133669,
+      "utf8_bytes": 133742
+    },
+    "est_Latn": {
+      "myte": 116414,
+      "myte_ube": 116265,
+      "ube": 133329,
+      "utf8_bytes": 133479
+    },
+    "eus_Latn": {
+      "myte": 115336,
+      "myte_ube": 115154,
+      "ube": 140087,
+      "utf8_bytes": 140269
+    },
+    "ewe_Latn": {
+      "myte": 138538,
+      "myte_ube": 138532,
+      "ube": 139907,
+      "utf8_bytes": 140007
+    },
+    "fao_Latn": {
+      "myte": 132802,
+      "myte_ube": 132662,
+      "ube": 144512,
+      "utf8_bytes": 144652
+    },
+    "fij_Latn": {
+      "myte": 147592,
+      "myte_ube": 147531,
+      "ube": 155263,
+      "utf8_bytes": 155324
+    },
+    "fin_Latn": {
+      "myte": 123790,
+      "myte_ube": 123738,
+      "ube": 145763,
+      "utf8_bytes": 145817
+    },
+    "fon_Latn": {
+      "myte": 167460,
+      "myte_ube": 166799,
+      "ube": 166285,
+      "utf8_bytes": 166953
+    },
+    "fra_Latn": {
+      "myte": 140157,
+      "myte_ube": 139698,
+      "ube": 163468,
+      "utf8_bytes": 163927
+    },
+    "fur_Latn": {
+      "myte": 140281,
+      "myte_ube": 140085,
+      "ube": 149281,
+      "utf8_bytes": 149477
+    },
+    "fuv_Latn": {
+      "myte": 119654,
+      "myte_ube": 119353,
+      "ube": 124842,
+      "utf8_bytes": 125143
+    },
+    "gaz_Latn": {
+      "myte": 151359,
+      "myte_ube": 150162,
+      "ube": 157626,
+      "utf8_bytes": 158823
+    },
+    "gla_Latn": {
+      "myte": 150539,
+      "myte_ube": 149158,
+      "ube": 167743,
+      "utf8_bytes": 169124
+    },
+    "gle_Latn": {
+      "myte": 144202,
+      "myte_ube": 144145,
+      "ube": 162166,
+      "utf8_bytes": 162241
+    },
+    "glg_Latn": {
+      "myte": 126247,
+      "myte_ube": 126242,
+      "ube": 149732,
+      "utf8_bytes": 149737
+    },
+    "grn_Latn": {
+      "myte": 138094,
+      "myte_ube": 137131,
+      "ube": 141422,
+      "utf8_bytes": 142834
+    },
+    "guj_Gujr": {
+      "myte": 151808,
+      "myte_ube": 141552,
+      "ube": 228751,
+      "utf8_bytes": 331068
+    },
+    "hat_Latn": {
+      "myte": 117217,
+      "myte_ube": 117191,
+      "ube": 124644,
+      "utf8_bytes": 124670
+    },
+    "hau_Latn": {
+      "myte": 128040,
+      "myte_ube": 127666,
+      "ube": 141333,
+      "utf8_bytes": 141707
+    },
+    "heb_Hebr": {
+      "myte": 128825,
+      "myte_ube": 128823,
+      "ube": 183079,
+      "utf8_bytes": 183081
+    },
+    "hin_Deva": {
+      "myte": 163564,
+      "myte_ube": 154404,
+      "ube": 234070,
+      "utf8_bytes": 337073
+    },
+    "hne_Deva": {
+      "myte": 162532,
+      "myte_ube": 150029,
+      "ube": 226498,
+      "utf8_bytes": 326057
+    },
+    "hrv_Latn": {
+      "myte": 119720,
+      "myte_ube": 119661,
+      "ube": 132103,
+      "utf8_bytes": 132166
+    },
+    "hun_Latn": {
+      "myte": 130419,
+      "myte_ube": 130308,
+      "ube": 152471,
+      "utf8_bytes": 152582
+    },
+    "hye_Armn": {
+      "myte": 142848,
+      "myte_ube": 142837,
+      "ube": 269644,
+      "utf8_bytes": 269655
+    },
+    "ibo_Latn": {
+      "myte": 139016,
+      "myte_ube": 138603,
+      "ube": 147904,
+      "utf8_bytes": 161020
+    },
+    "ilo_Latn": {
+      "myte": 146030,
+      "myte_ube": 145865,
+      "ube": 159889,
+      "utf8_bytes": 160054
+    },
+    "ind_Latn": {
+      "myte": 122039,
+      "myte_ube": 122012,
+      "ube": 142420,
+      "utf8_bytes": 142447
+    },
+    "isl_Latn": {
+      "myte": 125594,
+      "myte_ube": 125537,
+      "ube": 143384,
+      "utf8_bytes": 143449
+    },
+    "ita_Latn": {
+      "myte": 132471,
+      "myte_ube": 132428,
+      "ube": 157216,
+      "utf8_bytes": 157259
+    },
+    "jav_Latn": {
+      "myte": 118639,
+      "myte_ube": 118525,
+      "ube": 137073,
+      "utf8_bytes": 137187
+    },
+    "jpn_Jpan": {
+      "myte": 153434,
+      "myte_ube": 112360,
+      "ube": 112027,
+      "utf8_bytes": 167109
+    },
+    "kab_Latn": {
+      "myte": 137360,
+      "myte_ube": 137360,
+      "ube": 136442,
+      "utf8_bytes": 139656
+    },
+    "kac_Latn": {
+      "myte": 162814,
+      "myte_ube": 162811,
+      "ube": 169414,
+      "utf8_bytes": 169417
+    },
+    "kam_Latn": {
+      "myte": 131724,
+      "myte_ube": 131553,
+      "ube": 133501,
+      "utf8_bytes": 133672
+    },
+    "kan_Knda": {
+      "myte": 141236,
+      "myte_ube": 134849,
+      "ube": 256712,
+      "utf8_bytes": 375380
+    },
+    "kas_Arab": {
+      "myte": 174303,
+      "myte_ube": 174277,
+      "ube": 228151,
+      "utf8_bytes": 228179
+    },
+    "kas_Deva": {
+      "myte": 191983,
+      "myte_ube": 173512,
+      "ube": 221914,
+      "utf8_bytes": 317412
+    },
+    "kat_Geor": {
+      "myte": 156300,
+      "myte_ube": 146272,
+      "ube": 266759,
+      "utf8_bytes": 389581
+    },
+    "kaz_Cyrl": {
+      "myte": 133672,
+      "myte_ube": 133619,
+      "ube": 249926,
+      "utf8_bytes": 249981
+    },
+    "kbp_Latn": {
+      "myte": 179962,
+      "myte_ube": 179945,
+      "ube": 180698,
+      "utf8_bytes": 180715
+    },
+    "kea_Latn": {
+      "myte": 123099,
+      "myte_ube": 122920,
+      "ube": 133789,
+      "utf8_bytes": 133968
+    },
+    "khk_Cyrl": {
+      "myte": 141328,
+      "myte_ube": 141293,
+      "ube": 251989,
+      "utf8_bytes": 252028
+    },
+    "khm_Khmr": {
+      "myte": 169288,
+      "myte_ube": 157285,
+      "ube": 294202,
+      "utf8_bytes": 435160
+    },
+    "kik_Latn": {
+      "myte": 180463,
+      "myte_ube": 180399,
+      "ube": 170567,
+      "utf8_bytes": 170631
+    },
+    "kin_Latn": {
+      "myte": 141229,
+      "myte_ube": 139605,
+      "ube": 147518,
+      "utf8_bytes": 149150
+    },
+    "kir_Cyrl": {
+      "myte": 131038,
+      "myte_ube": 130947,
+      "ube": 250108,
+      "utf8_bytes": 250200
+    },
+    "kmb_Latn": {
+      "myte": 138068,
+      "myte_ube": 137794,
+      "ube": 146281,
+      "utf8_bytes": 146555
+    },
+    "kmr_Latn": {
+      "myte": 133179,
+      "myte_ube": 133174,
+      "ube": 144726,
+      "utf8_bytes": 144731
+    },
+    "knc_Arab": {
+      "myte": 187866,
+      "myte_ube": 187801,
+      "ube": 211310,
+      "utf8_bytes": 211375
+    },
+    "knc_Latn": {
+      "myte": 138912,
+      "myte_ube": 138802,
+      "ube": 146472,
+      "utf8_bytes": 146582
+    },
+    "kon_Latn": {
+      "myte": 139589,
+      "myte_ube": 139580,
+      "ube": 150067,
+      "utf8_bytes": 150076
+    },
+    "kor_Hang": {
+      "myte": 134561,
+      "myte_ube": 131265,
+      "ube": 111887,
+      "utf8_bytes": 157799
+    },
+    "lao_Laoo": {
+      "myte": 127432,
+      "myte_ube": 124435,
+      "ube": 245399,
+      "utf8_bytes": 360709
+    },
+    "lij_Latn": {
+      "myte": 143161,
+      "myte_ube": 142045,
+      "ube": 153300,
+      "utf8_bytes": 154416
+    },
+    "lim_Latn": {
+      "myte": 130218,
+      "myte_ube": 128874,
+      "ube": 140911,
+      "utf8_bytes": 142255
+    },
+    "lin_Latn": {
+      "myte": 131992,
+      "myte_ube": 131974,
+      "ube": 142369,
+      "utf8_bytes": 142387
+    },
+    "lit_Latn": {
+      "myte": 127358,
+      "myte_ube": 126923,
+      "ube": 138768,
+      "utf8_bytes": 139204
+    },
+    "lmo_Latn": {
+      "myte": 144610,
+      "myte_ube": 142660,
+      "ube": 151193,
+      "utf8_bytes": 153143
+    },
+    "ltg_Latn": {
+      "myte": 131448,
+      "myte_ube": 131410,
+      "ube": 137850,
+      "utf8_bytes": 137888
+    },
+    "ltz_Latn": {
+      "myte": 131795,
+      "myte_ube": 131725,
+      "ube": 151803,
+      "utf8_bytes": 151874
+    },
+    "lua_Latn": {
+      "myte": 133763,
+      "myte_ube": 133728,
+      "ube": 143066,
+      "utf8_bytes": 143101
+    },
+    "lug_Latn": {
+      "myte": 128291,
+      "myte_ube": 127462,
+      "ube": 135931,
+      "utf8_bytes": 136760
+    },
+    "luo_Latn": {
+      "myte": 130980,
+      "myte_ube": 130814,
+      "ube": 137735,
+      "utf8_bytes": 137901
+    },
+    "lus_Latn": {
+      "myte": 139371,
+      "myte_ube": 139369,
+      "ube": 146532,
+      "utf8_bytes": 146569
+    },
+    "lvs_Latn": {
+      "myte": 127632,
+      "myte_ube": 127547,
+      "ube": 146566,
+      "utf8_bytes": 146658
+    },
+    "mag_Deva": {
+      "myte": 165437,
+      "myte_ube": 150635,
+      "ube": 226700,
+      "utf8_bytes": 326702
+    },
+    "mai_Deva": {
+      "myte": 174433,
+      "myte_ube": 155876,
+      "ube": 232386,
+      "utf8_bytes": 335359
+    },
+    "mal_Mlym": {
+      "myte": 150133,
+      "myte_ube": 142386,
+      "ube": 280546,
+      "utf8_bytes": 411753
+    },
+    "mar_Deva": {
+      "myte": 141690,
+      "myte_ube": 135563,
+      "ube": 244286,
+      "utf8_bytes": 355511
+    },
+    "min_Arab": {
+      "myte": 172772,
+      "myte_ube": 172706,
+      "ube": 231353,
+      "utf8_bytes": 231419
+    },
+    "min_Latn": {
+      "myte": 127225,
+      "myte_ube": 127174,
+      "ube": 141243,
+      "utf8_bytes": 141294
+    },
+    "mkd_Cyrl": {
+      "myte": 139347,
+      "myte_ube": 139090,
+      "ube": 250938,
+      "utf8_bytes": 251195
+    },
+    "mlt_Latn": {
+      "myte": 128686,
+      "myte_ube": 127839,
+      "ube": 152950,
+      "utf8_bytes": 153797
+    },
+    "mni_Beng": {
+      "myte": 239905,
+      "myte_ube": 205375,
+      "ube": 252359,
+      "utf8_bytes": 367930
+    },
+    "mos_Latn": {
+      "myte": 133943,
+      "myte_ube": 133897,
+      "ube": 133157,
+      "utf8_bytes": 134864
+    },
+    "mri_Latn": {
+      "myte": 141683,
+      "myte_ube": 141682,
+      "ube": 153800,
+      "utf8_bytes": 153801
+    },
+    "mya_Mymr": {
+      "myte": 137732,
+      "myte_ube": 133121,
+      "ube": 314355,
+      "utf8_bytes": 465528
+    },
+    "nld_Latn": {
+      "myte": 126963,
+      "myte_ube": 126959,
+      "ube": 147727,
+      "utf8_bytes": 147731
+    },
+    "nno_Latn": {
+      "myte": 120238,
+      "myte_ube": 120122,
+      "ube": 136332,
+      "utf8_bytes": 136450
+    },
+    "nob_Latn": {
+      "myte": 117083,
+      "myte_ube": 117062,
+      "ube": 135007,
+      "utf8_bytes": 135030
+    },
+    "npi_Deva": {
+      "myte": 131861,
+      "myte_ube": 126512,
+      "ube": 233192,
+      "utf8_bytes": 339472
+    },
+    "nso_Latn": {
+      "myte": 144352,
+      "myte_ube": 144343,
+      "ube": 154904,
+      "utf8_bytes": 154913
+    },
+    "nus_Latn": {
+      "myte": 176250,
+      "myte_ube": 176246,
+      "ube": 174773,
+      "utf8_bytes": 174777
+    },
+    "nya_Latn": {
+      "myte": 122980,
+      "myte_ube": 122816,
+      "ube": 147358,
+      "utf8_bytes": 147522
+    },
+    "oci_Latn": {
+      "myte": 137479,
+      "myte_ube": 137032,
+      "ube": 154923,
+      "utf8_bytes": 155370
+    },
+    "ory_Orya": {
+      "myte": 367372,
+      "myte_ube": 252160,
+      "ube": 248152,
+      "utf8_bytes": 361459
+    },
+    "pag_Latn": {
+      "myte": 117868,
+      "myte_ube": 117860,
+      "ube": 129935,
+      "utf8_bytes": 129943
+    },
+    "pan_Guru": {
+      "myte": 181434,
+      "myte_ube": 167082,
+      "ube": 238803,
+      "utf8_bytes": 344172
+    },
+    "pap_Latn": {
+      "myte": 128556,
+      "myte_ube": 128285,
+      "ube": 142500,
+      "utf8_bytes": 142771
+    },
+    "pbt_Arab": {
+      "myte": 147146,
+      "myte_ube": 147133,
+      "ube": 214842,
+      "utf8_bytes": 214855
+    },
+    "pes_Arab": {
+      "myte": 145132,
+      "myte_ube": 143403,
+      "ube": 221762,
+      "utf8_bytes": 223501
+    },
+    "plt_Latn": {
+      "myte": 144108,
+      "myte_ube": 141895,
+      "ube": 163488,
+      "utf8_bytes": 165703
+    },
+    "pol_Latn": {
+      "myte": 130558,
+      "myte_ube": 130310,
+      "ube": 148001,
+      "utf8_bytes": 148251
+    },
+    "por_Latn": {
+      "myte": 125435,
+      "myte_ube": 125420,
+      "ube": 147431,
+      "utf8_bytes": 147448
+    },
+    "prs_Arab": {
+      "myte": 137976,
+      "myte_ube": 137902,
+      "ube": 214941,
+      "utf8_bytes": 215017
+    },
+    "quy_Latn": {
+      "myte": 130629,
+      "myte_ube": 130444,
+      "ube": 141981,
+      "utf8_bytes": 142166
+    },
+    "ron_Latn": {
+      "myte": 136876,
+      "myte_ube": 136703,
+      "ube": 156752,
+      "utf8_bytes": 156925
+    },
+    "run_Latn": {
+      "myte": 139575,
+      "myte_ube": 139270,
+      "ube": 147745,
+      "utf8_bytes": 148052
+    },
+    "rus_Cyrl": {
+      "myte": 144170,
+      "myte_ube": 144060,
+      "ube": 260231,
+      "utf8_bytes": 260342
+    },
+    "sag_Latn": {
+      "myte": 141537,
+      "myte_ube": 141509,
+      "ube": 147355,
+      "utf8_bytes": 147383
+    },
+    "san_Deva": {
+      "myte": 167499,
+      "myte_ube": 151032,
+      "ube": 237486,
+      "utf8_bytes": 346707
+    },
+    "sat_Olck": {
+      "myte": 369472,
+      "myte_ube": 254717,
+      "ube": 254556,
+      "utf8_bytes": 369315
+    },
+    "scn_Latn": {
+      "myte": 134480,
+      "myte_ube": 133473,
+      "ube": 144651,
+      "utf8_bytes": 146022
+    },
+    "shn_Mymr": {
+      "myte": 444885,
+      "myte_ube": 328056,
+      "ube": 355396,
+      "utf8_bytes": 522478
+    },
+    "sin_Sinh": {
+      "myte": 151009,
+      "myte_ube": 141907,
+      "ube": 238571,
+      "utf8_bytes": 346056
+    },
+    "slk_Latn": {
+      "myte": 126186,
+      "myte_ube": 126011,
+      "ube": 143563,
+      "utf8_bytes": 143738
+    },
+    "slv_Latn": {
+      "myte": 118957,
+      "myte_ube": 118936,
+      "ube": 133987,
+      "utf8_bytes": 134009
+    },
+    "smo_Latn": {
+      "myte": 148035,
+      "myte_ube": 144942,
+      "ube": 156938,
+      "utf8_bytes": 160034
+    },
+    "sna_Latn": {
+      "myte": 125610,
+      "myte_ube": 125607,
+      "ube": 147619,
+      "utf8_bytes": 147622
+    },
+    "snd_Arab": {
+      "myte": 146902,
+      "myte_ube": 146874,
+      "ube": 211853,
+      "utf8_bytes": 211881
+    },
+    "som_Latn": {
+      "myte": 135062,
+      "myte_ube": 134933,
+      "ube": 151811,
+      "utf8_bytes": 151942
+    },
+    "sot_Latn": {
+      "myte": 144569,
+      "myte_ube": 144438,
+      "ube": 158896,
+      "utf8_bytes": 159027
+    },
+    "spa_Latn": {
+      "myte": 135031,
+      "myte_ube": 135030,
+      "ube": 159898,
+      "utf8_bytes": 159899
+    },
+    "srd_Latn": {
+      "myte": 143371,
+      "myte_ube": 142381,
+      "ube": 156670,
+      "utf8_bytes": 157660
+    },
+    "srp_Cyrl": {
+      "myte": 137596,
+      "myte_ube": 137380,
+      "ube": 237774,
+      "utf8_bytes": 237992
+    },
+    "ssw_Latn": {
+      "myte": 131217,
+      "myte_ube": 131209,
+      "ube": 148748,
+      "utf8_bytes": 148756
+    },
+    "sun_Latn": {
+      "myte": 119428,
+      "myte_ube": 119423,
+      "ube": 138233,
+      "utf8_bytes": 138238
+    },
+    "swe_Latn": {
+      "myte": 116235,
+      "myte_ube": 116211,
+      "ube": 137366,
+      "utf8_bytes": 137390
+    },
+    "swh_Latn": {
+      "myte": 123305,
+      "myte_ube": 123208,
+      "ube": 138211,
+      "utf8_bytes": 138308
+    },
+    "szl_Latn": {
+      "myte": 139445,
+      "myte_ube": 139407,
+      "ube": 145493,
+      "utf8_bytes": 145531
+    },
+    "tam_Taml": {
+      "myte": 155011,
+      "myte_ube": 150115,
+      "ube": 287889,
+      "utf8_bytes": 421641
+    },
+    "taq_Latn": {
+      "myte": 129859,
+      "myte_ube": 129818,
+      "ube": 132375,
+      "utf8_bytes": 133051
+    },
+    "taq_Tfng": {
+      "myte": 302920,
+      "myte_ube": 213418,
+      "ube": 213480,
+      "utf8_bytes": 302982
+    },
+    "tat_Cyrl": {
+      "myte": 159506,
+      "myte_ube": 159485,
+      "ube": 244739,
+      "utf8_bytes": 244760
+    },
+    "tel_Telu": {
+      "myte": 141914,
+      "myte_ube": 136176,
+      "ube": 243077,
+      "utf8_bytes": 353676
+    },
+    "tgk_Cyrl": {
+      "myte": 152247,
+      "myte_ube": 152216,
+      "ube": 265482,
+      "utf8_bytes": 265519
+    },
+    "tgl_Latn": {
+      "myte": 151955,
+      "myte_ube": 151931,
+      "ube": 166252,
+      "utf8_bytes": 166276
+    },
+    "tha_Thai": {
+      "myte": 135753,
+      "myte_ube": 130596,
+      "ube": 245493,
+      "utf8_bytes": 364857
+    },
+    "tir_Ethi": {
+      "myte": 198905,
+      "myte_ube": 146373,
+      "ube": 161250,
+      "utf8_bytes": 231799
+    },
+    "tpi_Latn": {
+      "myte": 156896,
+      "myte_ube": 156842,
+      "ube": 169093,
+      "utf8_bytes": 169147
+    },
+    "tsn_Latn": {
+      "myte": 152287,
+      "myte_ube": 152206,
+      "ube": 163166,
+      "utf8_bytes": 163247
+    },
+    "tso_Latn": {
+      "myte": 148606,
+      "myte_ube": 148126,
+      "ube": 158684,
+      "utf8_bytes": 159164
+    },
+    "tuk_Latn": {
+      "myte": 152301,
+      "myte_ube": 152260,
+      "ube": 154559,
+      "utf8_bytes": 154604
+    },
+    "tum_Latn": {
+      "myte": 160244,
+      "myte_ube": 160233,
+      "ube": 174837,
+      "utf8_bytes": 174848
+    },
+    "tur_Latn": {
+      "myte": 125701,
+      "myte_ube": 125660,
+      "ube": 147849,
+      "utf8_bytes": 147896
+    },
+    "twi_Latn": {
+      "myte": 135246,
+      "myte_ube": 134829,
+      "ube": 138348,
+      "utf8_bytes": 138765
+    },
+    "tzm_Tfng": {
+      "myte": 303085,
+      "myte_ube": 210512,
+      "ube": 210549,
+      "utf8_bytes": 303130
+    },
+    "uig_Arab": {
+      "myte": 226067,
+      "myte_ube": 226046,
+      "ube": 261208,
+      "utf8_bytes": 261229
+    },
+    "ukr_Cyrl": {
+      "myte": 142562,
+      "myte_ube": 142453,
+      "ube": 245777,
+      "utf8_bytes": 245886
+    },
+    "umb_Latn": {
+      "myte": 131397,
+      "myte_ube": 130057,
+      "ube": 137692,
+      "utf8_bytes": 139245
+    },
+    "urd_Arab": {
+      "myte": 152648,
+      "myte_ube": 152590,
+      "ube": 231640,
+      "utf8_bytes": 231700
+    },
+    "uzn_Latn": {
+      "myte": 124146,
+      "myte_ube": 124081,
+      "ube": 149408,
+      "utf8_bytes": 149474
+    },
+    "vec_Latn": {
+      "myte": 126992,
+      "myte_ube": 126130,
+      "ube": 138720,
+      "utf8_bytes": 139582
+    },
+    "vie_Latn": {
+      "myte": 181747,
+      "myte_ube": 181645,
+      "ube": 168374,
+      "utf8_bytes": 183606
+    },
+    "war_Latn": {
+      "myte": 151393,
+      "myte_ube": 151364,
+      "ube": 164802,
+      "utf8_bytes": 164831
+    },
+    "wol_Latn": {
+      "myte": 129112,
+      "myte_ube": 128949,
+      "ube": 132041,
+      "utf8_bytes": 132204
+    },
+    "xho_Latn": {
+      "myte": 116413,
+      "myte_ube": 116367,
+      "ube": 139198,
+      "utf8_bytes": 139244
+    },
+    "ydd_Hebr": {
+      "myte": 147215,
+      "myte_ube": 147202,
+      "ube": 256634,
+      "utf8_bytes": 256647
+    },
+    "yor_Latn": {
+      "myte": 146551,
+      "myte_ube": 146386,
+      "ube": 160758,
+      "utf8_bytes": 168853
+    },
+    "yue_Hant": {
+      "myte": 110929,
+      "myte_ube": 76227,
+      "ube": 77262,
+      "utf8_bytes": 114433
+    },
+    "zho_Hans": {
+      "myte": 118871,
+      "myte_ube": 81424,
+      "ube": 82081,
+      "utf8_bytes": 120803
+    },
+    "zho_Hant": {
+      "myte": 112743,
+      "myte_ube": 77452,
+      "ube": 78477,
+      "utf8_bytes": 116199
+    },
+    "zsm_Latn": {
+      "myte": 126000,
+      "myte_ube": 125826,
+      "ube": 146403,
+      "utf8_bytes": 146577
+    },
+    "zul_Latn": {
+      "myte": 122761,
+      "myte_ube": 122656,
+      "ube": 148497,
+      "utf8_bytes": 148602
+    }
+  },
+  "summaries": {
+    "myte": {
+      "cjk": 124.61225296442687,
+      "cjk_configurations": 5,
+      "english": 109.1403162055336,
+      "other_bmp": 349.3983625070581,
+      "other_bmp_configurations": 7,
+      "overall": 148.14168701077273,
+      "total_positions": 30583555
+    },
+    "myte_ube": {
+      "cjk": 94.6102766798419,
+      "cjk_configurations": 5,
+      "english": 109.09387351778656,
+      "other_bmp": 247.62182382834553,
+      "other_bmp_configurations": 7,
+      "overall": 141.35439917073555,
+      "total_positions": 29182333
+    },
+    "ube": {
+      "cjk": 91.25177865612648,
+      "cjk_configurations": 5,
+      "english": 130.4812252964427,
+      "other_bmp": 277.05632411067194,
+      "other_bmp_configurations": 7,
+      "overall": 176.0881190420833,
+      "total_positions": 36353040
+    },
+    "utf8_bytes": {
+      "cjk": 133.66462450592886,
+      "cjk_configurations": 5,
+      "english": 130.52964426877472,
+      "other_bmp": 406.6315640880858,
+      "other_bmp_configurations": 7,
+      "overall": 196.1057651321397,
+      "total_positions": 40485643
+    }
+  },
+  "verification": {
+    "decoded_equals_released_myte_decoder": 206448,
+    "myte_ube_distinct_symbols_observed": 436,
+    "myte_ube_symbol_stream_sha256": "59b634c702414dc960e0e27cc6463e7b73bb6c392371572d621fed49792d94ef",
+    "post_myte_stream_exact": 206448,
+    "sentences_checked": 206448
+  }
+}
