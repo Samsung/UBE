@@ -83,7 +83,7 @@ p { margin: 12px 0; }
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 20px 0; }
 .stat { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
 .stat b { display: block; color: var(--stat); font-size: 28px; line-height: 1.2; font-variant-numeric: tabular-nums; }
-.stat span { display: block; margin-top: 4px; color: var(--muted); font-size: 14px; line-height: 1.45; }
+.stat > span { display: block; margin-top: 4px; color: var(--muted); font-size: 14px; line-height: 1.45; }
 ul.points { padding-left: 20px; }
 ul.points li { margin: 8px 0; }
 .table-wrap { overflow-x: auto; margin: 20px 0; }
@@ -165,7 +165,7 @@ English-normalized token-count ratios (Gini 6–14% lower on FLORES-200 at 16K�
 token-budget disparity. In multilingual language models, UBE matches BBPE’s quality. In the main multilingual
 settings, UBE reduces token counts most where they are highest and also lowers English counts, yielding more usable
 context and faster prompt processing in content-matched benchmarks. Byte-level models benefit directly: UBE shortens
-their inputs by 29–33% in all 39 FLORES-200 languages written mostly in 3-byte characters (1.4–1.5 times as
+their inputs by 29–33% in all 39 of the FLORES-200 languages written mostly in 3-byte characters (1.4–1.5 times as
 much text per context window), lowers byte-level Gini by 28%, and lengthens no input.</p>
 
 <h2 id="method">How UBE works</h2>
@@ -267,7 +267,7 @@ one-ninth as much parallel text in these scripts as in English.</p>
 <div class="stats">
   <div class="stat"><b>29–33%</b><span>shorter inputs in all 39 languages written mostly in 3-byte characters</span></div>
   <div class="stat"><b>1.41–1.50×</b><span>as much of this text in the same context window</span></div>
-  <div class="stat"><b>202/204</b><span>FLORES-200 languages with shorter inputs; the other two tie, none is longer</span></div>
+  <div class="stat"><b>202/204</b><span>languages in <span class="nowrap">FLORES-200</span> with shorter inputs; the other two tie, none is longer</span></div>
   <div class="stat"><b>−28%</b><span>byte-level Gini (0.2077 → 0.1500)</span></div>
 </div>
 <ul class="points">
@@ -296,7 +296,7 @@ one-ninth as much parallel text in these scripts as in English.</p>
 <figure class="narrow">
   <div class="frame"><img src="assets/byte_level_savings.png" width="1200" height="955" loading="lazy"
        alt="Input positions UBE saves against UTF-8 bytes for each FLORES-200 language"></div>
-  <figcaption>Input positions UBE saves against UTF-8 bytes for each of the 204 FLORES-200 languages, before BPE
+  <figcaption>Input positions UBE saves against UTF-8 bytes for each of the 204 languages in FLORES-200, before BPE
   merging. The 39 languages with at least half their characters encoded as 3 UTF-8 bytes have 29–33% shorter
   mean inputs, close to the one-third limit. Chinese is the mean of Chinese (Simplified), Chinese (Traditional),
   and Cantonese.</figcaption>
@@ -324,7 +324,7 @@ the same tokenizer; FLORES-200 Gini uses the 203 non-English premiums.</p>
 <details>
 <summary>Is decoding exact?</summary>
 <div class="answer">
-<p>Yes. The paper proves exact round-trip decoding, and all 204 FLORES-200 languages decode without a failure. An
+<p>Yes. The paper proves exact round-trip decoding, and all 204 languages in FLORES-200 decode without a failure. An
 exhaustive Unicode 17 audit covers every scalar value and the official normalization, grapheme-break and emoji test
 suites, and UBE recovers every input. The audit is included in <a href="https://github.com/Samsung/UBE/blob/main/paper/README.md"><code>paper/</code></a>.</p>
 </div>
