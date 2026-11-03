@@ -153,7 +153,7 @@ Lower cross-script disparity for BPE tokenizers, and up to one-third shorter inp
 <p>Byte-level byte-pair encoding (BBPE) tokenizers are attractive for multilingual large language models because they
 cover all Unicode text. In UTF-8-based BBPE, however, many scripts start from a higher fallback cost than English: when
 no learned merges apply, a multibyte character requires multiple byte-derived symbols. We call this worst-case
-pre-merge cost the <em>encoding floor</em>. A higher floor can increase token counts and per-request cost and shrink
+pre-merge cost the <em>encoding floor</em>. A higher floor can increase token counts and per-request cost while shrinking
 usable context. Changing the whole text encoding can reduce this gap but can make already-efficient English spans more
 expensive in mixed-script text. We propose Universal Byte-Level Encoding (UBE), a dual-alphabet tokenizer that keeps
 1–2-byte UTF-8 characters in UTF-8 and routes 3–4-byte characters through UTF-16. This lowers the encoding floor for
