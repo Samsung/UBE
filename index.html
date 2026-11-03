@@ -202,7 +202,7 @@ leaving 16 code-point bits, which UTF-16 stores in 2 bytes.</p>
 
 <p>These counts give the encoding floor: the base-symbol cost before BPE merging. With a 16K BBPE tokenizer trained on
 101 languages, a FLORES-200 sentence in the seven languages written in Tibetan, Myanmar, Ol Chiki or Tifinagh
-script (the Other BMP group) takes 308.522 tokens on average and an English sentence 34.863, so the same context window holds only about
+script (the near-floor languages) takes 308.522 tokens on average and an English sentence 34.863, so the same context window holds only about
 one-ninth as much parallel text in these scripts as in English.</p>
 
 <h2 id="results">Results</h2>
@@ -228,7 +228,7 @@ one-ninth as much parallel text in these scripts as in English.</p>
   a 182M-parameter model and 6-language 32K tokenizers, the full-model prefill rate rises by 45.0% for Amharic and by
   3.9% for English.</li>
   <li><strong>Robust to the training mixture.</strong> With 30 GiB mC4 tokenizer-training mixtures that emulate <span class="nowrap">GPT-4o</span>,
-  Mistral NeMo and a Chinese-centric scenario, UBE uses 1.9–4.6% fewer tokens, lowers Other BMP tokens by 12.5–25.3%
+  Mistral NeMo and a Chinese-centric scenario, UBE uses 1.9–4.6% fewer tokens, lowers near-floor tokens by 12.5–25.3%
   and the token-premium Gini by 5.5–11.7% in every pair, from 32K up to 200K vocabularies. English tokens fall in
   every pair as well, by up to 0.11%.</li>
   <li><strong>Same language-model quality.</strong> In matched multilingual language-model experiments from 182M to
@@ -308,7 +308,7 @@ one-ninth as much parallel text in these scripts as in English.</p>
   <thead><tr><th>Languages</th><th class="num">UBE</th><th class="num">UTF-8 bytes</th><th class="num">Change</th></tr></thead>
   <tbody>
     <tr><td>Korean, Chinese, Japanese</td><td class="num"><b>91.252</b></td><td class="num">133.665</td><td class="num">−31.73%</td></tr>
-    <tr><td>Other BMP (7 languages)</td><td class="num"><b>277.056</b></td><td class="num">406.632</td><td class="num">−31.87%</td></tr>
+    <tr><td>Near-floor (7 languages)</td><td class="num"><b>277.056</b></td><td class="num">406.632</td><td class="num">−31.87%</td></tr>
     <tr><td>All 204 languages</td><td class="num"><b>176.088</b></td><td class="num">196.106</td><td class="num">−10.21%</td></tr>
     <tr><td>English</td><td class="num"><b>130.481</b></td><td class="num">130.530</td><td class="num">−0.04%</td></tr>
   </tbody>
@@ -393,7 +393,7 @@ with benchmarks weighted equally within each group.</p>
 <li>Low-coverage scripts written in 3-byte BMP characters, which stay near the encoding floor.</li>
 <li>Byte-level models, which learn no merges.</li>
 </ul>
-<p>Under commercial-style training mixtures, the Other BMP and Gini reductions persist up to 200K.</p>
+<p>Under commercial-style training mixtures, the near-floor and Gini reductions persist up to 200K.</p>
 </div>
 </details>
 </div>
