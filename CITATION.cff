@@ -1,0 +1,48 @@
+# Modified by Samsung Electronics Co., Ltd. in 2026 for Universal Byte-Level Encoding (UBE).
+# Samsung's modifications are licensed under CC BY-NC-SA 4.0; see NOTICE.
+
+cff-version: 1.2.0
+title: "Tokenizers with Universal Byte-Level Encoding (UBE)"
+message: "If you use the UBE components, please cite the paper below."
+type: software
+authors:
+  - given-names: Anthony
+    family-names: Moi
+    email: m.anthony.moi@gmail.com
+    affiliation: HuggingFace
+  - given-names: Nicolas
+    family-names: Patry
+    affiliation: HuggingFace
+  - given-names: Hyunsik
+    family-names: Kim
+    affiliation: Samsung Research
+  - given-names: Youngmoon
+    family-names: Jung
+    affiliation: Samsung Research
+repository-code: 'https://github.com/Samsung/UBE'
+url: 'https://github.com/Samsung/UBE'
+abstract: >-
+  Hugging Face Tokenizers v0.23.3 with the Universal Byte-Level Encoding (UBE)
+  pre-tokenizer, decoder, post-processor, and Python implementation, together
+  with the paper's FLORES-200, Unicode, and MYTE-UBE analysis code.
+keywords:
+  - Rust
+  - Tokenizer
+  - NLP
+# The Hugging Face Tokenizers code in this repository keeps its Apache-2.0 license; see NOTICE.
+license: CC-BY-NC-SA-4.0
+version: 0.23.3
+preferred-citation:
+  type: conference-paper
+  title: "Universal Byte-Level Encoding: UTF-8/UTF-16 Routing to Reduce Cross-Script Token-Budget Disparities"
+  authors:
+    - family-names: Kim
+      given-names: Hyunsik
+      affiliation: Samsung Research
+    - family-names: Jung
+      given-names: Youngmoon
+      affiliation: Samsung Research
+  collection-title: "Advances in Neural Information Processing Systems"
+  volume: 39
+  year: 2026
+  url: "https://arxiv.org/abs/2610.01984"
