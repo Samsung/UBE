@@ -190,7 +190,9 @@ two base symbols instead of three, while ASCII keeps exactly the bytes it had.</
 
 <p>By design, UTF-8 is less compact for 3-byte BMP characters: a 3-byte sequence (<code>1110xxxx 10xxxxxx
 10xxxxxx</code>) spends 8 of its 24 bits on length and continuation markers that make UTF-8 self-synchronizing,
-leaving 16 code-point bits, which UTF-16 stores in 2 bytes.</p>
+leaving 16 code-point bits, which UTF-16 stores in 2 bytes. Routed UTF-16 bytes synchronize at the alphabet switch
+instead: the decoder pairs each run’s bytes into 2-byte code units from its first symbol (see
+<a href="https://github.com/Samsung/UBE#decoding-parts-of-a-sequence">Decoding parts of a sequence</a>).</p>
 
 <figure>
   <div class="frame"><img src="assets/utf_bits.png" width="1534" height="622" loading="lazy"
@@ -203,7 +205,7 @@ leaving 16 code-point bits, which UTF-16 stores in 2 bytes.</p>
 <p>These counts give the encoding floor: the base-symbol cost before BPE merging. With a 16K BBPE tokenizer trained on
 101 languages, a FLORES-200 sentence in the seven languages written in Tibetan, Myanmar, Ol Chiki or Tifinagh
 script (the <em>low-coverage BMP</em> languages) takes 308.522 tokens on average and an English sentence 34.863, so the same context window holds only about
-one-ninth as much parallel text in these scripts as in English.</p>
+one-ninth as much parallel text in these languages as in English.</p>
 
 <h2 id="results">Results</h2>
 <h3>Tokenizers</h3>
@@ -390,10 +392,10 @@ with benchmarks weighted equally within each group.</p>
 <div class="answer">
 <ul>
 <li>Compact vocabularies of 16K–64K, for example in on-device models.</li>
-<li>Low-coverage scripts written in 3-byte BMP characters, which stay near the encoding floor.</li>
+<li>The low-coverage BMP languages, which stay near the encoding floor.</li>
 <li>Byte-level models, which learn no merges.</li>
 </ul>
-<p>Under commercial-style training mixtures, UBE's token-count reductions for the low-coverage BMP languages and its Gini reductions persist up to 200K.</p>
+<p>Under emulated commercial tokenizer-training mixtures at 32K–200K, UBE still lowers Gini and the total, low-coverage BMP and English token counts.</p>
 </div>
 </details>
 </div>
