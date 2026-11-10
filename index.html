@@ -213,7 +213,7 @@ one-ninth as much parallel text in these languages as in English.</p>
   <div class="stat"><b>6–14%</b><span>lower token-premium Gini on FLORES-200 in all nine core settings <span class="nowrap">(16K–64K)</span></span></div>
   <div class="stat"><b>29–34%</b><span>fewer tokens for Santali, Central Atlas Tamazight and Tibetan (101 languages, 16K)</span></div>
   <div class="stat"><b>53%</b><span>more Santali text in a fixed token budget (101 languages, 32K)</span></div>
-  <div class="stat"><b>45.0%</b><span>higher prefill rate for Amharic in a content-matched benchmark (3.9% for English)</span></div>
+  <div class="stat"><b>45.0%</b><span>higher prefill rate for Amharic in a content-matched benchmark</span></div>
 </div>
 <ul class="points">
   <li><strong>Lower token-budget disparity.</strong> On FLORES-200 with tokenizers trained on 101 languages, the Gini
@@ -227,8 +227,7 @@ one-ninth as much parallel text in these languages as in English.</p>
   vocabulary size in the paper’s multilingual settings.</li>
   <li><strong>More text for the same budget.</strong> Under a fixed token budget, Santali (Ol Chiki) fits 53% more
   text with 101-language 32K tokenizers, and English 0.3% more. In a content-matched prompt-processing benchmark with
-  a 182M-parameter model and 6-language 32K tokenizers, the full-model prefill rate rises by 45.0% for Amharic and by
-  3.9% for English.</li>
+  a 182M-parameter model and 6-language 32K tokenizers, the full-model prefill rate rises by 45.0% for Amharic.</li>
   <li><strong>Robust to the training mixture.</strong> With 30 GiB mC4 tokenizer-training mixtures that emulate <span class="nowrap">GPT-4o</span>,
   Mistral NeMo and a Chinese-centric scenario, UBE uses 1.9–4.6% fewer tokens, lowers token counts for the low-coverage BMP languages by 12.5–25.3%
   and the token-premium Gini by 5.5–11.7% in every pair, from 32K up to 200K vocabularies. English tokens fall in
