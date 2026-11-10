@@ -1,0 +1,86 @@
+Universal Byte-Level Encoding (UBE) for Hugging Face Tokenizers
+Copyright 2026 Samsung Electronics Co., Ltd.
+
+This repository is a modified version of Hugging Face Tokenizers
+(https://github.com/huggingface/tokenizers). The repository root is based on
+Tokenizers v0.23.3 and the v1/ folder on Tokenizers v1.0.0-rc.2.
+
+Licenses
+- The Hugging Face Tokenizers code keeps its Apache License, Version 2.0
+  (LICENSE; v1/LICENSE).
+- The modifications and additions made by Samsung Electronics Co., Ltd. are
+  licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+  International License (CC BY-NC-SA 4.0; LICENSE-CC-BY-NC-SA-4.0).
+
+Files added by Samsung Electronics Co., Ltd.
+  paper/ (all files)
+  bindings/python/py_src/tokenizers/implementations/universal_byte_level_bpe.py
+    (adapted from byte_level_bpe.py)
+  bindings/python/py_src/tokenizers/implementations/universal_byte_level_decoding.py
+  bindings/python/tests/implementations/test_universal_byte_level_bpe.py
+  bindings/python/tests/implementations/test_universal_byte_level_decoding.py
+  tokenizers/src/decoders/universal_byte_level.rs
+  tokenizers/src/pre_tokenizers/universal_byte_level.rs
+    (adapted from tokenizers/src/pre_tokenizers/byte_level.rs, including the
+    GPT-2 splitting pattern attributed there to
+    https://github.com/openai/gpt-2/blob/master/src/encoder.py#L98)
+  v1/bindings/python/tests/test_universal_byte_level.py
+  v1/tokenizers/tk-encode/src/utils/universal_byte_level.rs
+  v1/tokenizers/tk-train/examples/train_universal_byte_level.rs
+  v1/tokenizers/tk-train/tests/universal_byte_level.rs
+
+Hugging Face Tokenizers files modified by Samsung Electronics Co., Ltd.
+  .gitignore
+  CITATION.cff
+  README.md
+  bindings/python/README.md
+  bindings/python/py_src/tokenizers/__init__.py
+  bindings/python/py_src/tokenizers/decoders/__init__.py
+  bindings/python/py_src/tokenizers/decoders/__init__.pyi
+  bindings/python/py_src/tokenizers/implementations/__init__.py
+  bindings/python/py_src/tokenizers/pre_tokenizers/__init__.py
+  bindings/python/py_src/tokenizers/pre_tokenizers/__init__.pyi
+  bindings/python/py_src/tokenizers/processors/__init__.py
+  bindings/python/py_src/tokenizers/processors/__init__.pyi
+  bindings/python/pyproject.toml
+  bindings/python/src/decoders.rs
+  bindings/python/src/pre_tokenizers.rs
+  bindings/python/src/processors.rs
+  bindings/python/tests/bindings/test_decoders.py
+  bindings/python/tests/bindings/test_pre_tokenizers.py
+  bindings/python/tests/bindings/test_processors.py
+  tokenizers/Cargo.toml
+  tokenizers/src/decoders/mod.rs
+  tokenizers/src/models/bpe/trainer.rs
+  tokenizers/src/pre_tokenizers/mod.rs
+  tokenizers/src/processors/mod.rs
+  v1/README.md
+  v1/bindings/python/README.md
+  v1/tokenizers/tk-convert/Cargo.toml
+  v1/tokenizers/tk-convert/src/convert.rs
+  v1/tokenizers/tk-convert/tests/convert.rs
+  v1/tokenizers/tk-encode/Cargo.toml
+  v1/tokenizers/tk-encode/README.md
+  v1/tokenizers/tk-encode/src/models/bpe/convert.rs
+  v1/tokenizers/tk-encode/src/models/bpe/mod.rs
+  v1/tokenizers/tk-encode/src/models/bpe/model.rs
+  v1/tokenizers/tk-encode/src/models/bpe/serialization.rs
+  v1/tokenizers/tk-encode/src/models/bpe/tests.rs
+  v1/tokenizers/tk-encode/src/tokenizer/pipeline/mod.rs
+  v1/tokenizers/tk-encode/src/utils/mod.rs
+  v1/tokenizers/tk-serialize/Cargo.toml
+  v1/tokenizers/tk-serialize/SPEC.md
+  v1/tokenizers/tk-serialize/src/from_json/model.rs
+  v1/tokenizers/tk-serialize/src/from_json/tests.rs
+  v1/tokenizers/tk-serialize/src/to_json/model.rs
+  v1/tokenizers/tk-serialize/src/to_json/tests.rs
+  v1/tokenizers/tk-train/Cargo.toml
+  v1/tokenizers/tk-train/README.md
+  v1/tokenizers/tk-train/src/trainers/bpe/mod.rs
+
+Of these, the following are generated from the modified Rust sources:
+  bindings/python/py_src/tokenizers/decoders/__init__.pyi
+  bindings/python/py_src/tokenizers/pre_tokenizers/__init__.py
+  bindings/python/py_src/tokenizers/pre_tokenizers/__init__.pyi
+  bindings/python/py_src/tokenizers/processors/__init__.py
+  bindings/python/py_src/tokenizers/processors/__init__.pyi

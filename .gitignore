@@ -1,0 +1,30 @@
+# Modified by Samsung Electronics Co., Ltd. in 2026 for Universal Byte-Level Encoding (UBE).
+# Samsung's modifications are licensed under CC BY-NC-SA 4.0; see NOTICE.
+
+.DS_Store
+*~
+
+.vim
+.env
+/.venv/
+target
+.idea
+**/Cargo.lock
+
+/data
+tokenizers/data
+bindings/python/tests/data
+docs/build/
+docs/make.bat
+
+__pycache__
+pip-wheel-metadata
+*.egg-info
+*.so
+/bindings/python/build
+/bindings/python/dist
+
+.vscode
+*.code-workspace
+
+uv.lock

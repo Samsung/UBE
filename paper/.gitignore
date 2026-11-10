@@ -1,0 +1,7 @@
+data/
+/MYTE/
+/script_tok/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
