@@ -13,12 +13,14 @@ Licenses
   International License (CC BY-NC-SA 4.0; LICENSE-CC-BY-NC-SA-4.0).
 
 Files added by Samsung Electronics Co., Ltd.
+  experiments/ (all files)
   paper/ (all files)
   bindings/python/py_src/tokenizers/implementations/universal_byte_level_bpe.py
     (adapted from byte_level_bpe.py)
   bindings/python/py_src/tokenizers/implementations/universal_byte_level_decoding.py
   bindings/python/tests/implementations/test_universal_byte_level_bpe.py
   bindings/python/tests/implementations/test_universal_byte_level_decoding.py
+  bindings/python/tests/implementations/test_universal_byte_level_unigram.py
   tokenizers/src/decoders/universal_byte_level.rs
   tokenizers/src/pre_tokenizers/universal_byte_level.rs
     (adapted from tokenizers/src/pre_tokenizers/byte_level.rs, including the

@@ -6,8 +6,10 @@
 
 Hyunsik Kim and Youngmoon Jung, Samsung Research
 
-**UTF-8 where it is compact, UTF-16 where it is not.** Lower cross-script disparity for BPE tokenizers, and up to
-one-third shorter inputs for byte-level models.
+**News (November 2026):** UBE with Unigram tokenizers: [results](#unigram-tokenizers) and [reproduction scripts](experiments/unigram/README.md).
+
+**UTF-8 where it is compact, UTF-16 where it is not.** Lower cross-script disparity for BPE and Unigram tokenizers,
+and up to one-third shorter inputs for byte-level models.
 
 <p align="center">
   <img src="paper/figures/ube_pipeline.png" width="720"
@@ -161,6 +163,41 @@ Chinese (Traditional), and Cantonese.</em></p>
 | All 204 languages                                      | **176.088** |     196.106 | −10.21% |
 | English                                                | **130.481** |     130.530 |  −0.04% |
 
+### Unigram tokenizers
+
+Added in November 2026. The scripts that reproduce these results are in
+[`experiments/unigram/`](experiments/unigram/README.md).
+
+The percentage ranges cover the three vocabulary sizes (16K, 32K and 64K) tested on the
+same 1 GiB of training text.
+
+- **Larger gains with Unigram.** In the 39 languages written mostly in 3-byte
+  characters, UBE cuts mean tokens per sentence by 15.1–17.8% with Unigram
+  tokenizers, compared with 5.3–8.2% with BPE tokenizers trained the same way.
+- **Lower disparity.** The Gini coefficient of English-normalized premiums falls
+  by 15.5–15.8%.
+- **English is shorter too.** English needs 7.3–9.6% fewer tokens.
+- **Holds with more training text.** With 4 GiB of training text at 32K, the
+  reductions are 16.1% for the 39 languages, 10.3% for English and 14.9% for the
+  Gini.
+- **No code changes.** The library's Unigram trainer takes UBE's 512 base
+  symbols as its initial alphabet (see
+  [Training a Unigram tokenizer](#training-a-unigram-tokenizer)).
+
+Tokenizers were trained with UBE and with UTF-8 bytes (the 256 symbols of
+`ByteLevel`) on the same samples of the paper's 101-language mC4 training
+mixture and measured on FLORES-200 devtest. Unigram used its default maximum
+piece length of 16 base symbols. Each cell is UBE's change relative to UTF-8
+with the same trainer and training text; negative values mean fewer tokens or
+lower disparity.
+
+| UBE vs UTF-8 (FLORES-200 devtest) | Unigram: 39 languages | BPE: 39 languages | Unigram: English | Unigram: Gini |
+| :-------------------------------- | --------------------: | ----------------: | ---------------: | ------------: |
+| 1 GiB text, 16K                   |                −15.1% |             −7.5% |            −7.3% |        −15.5% |
+| 1 GiB text, 32K                   |                −16.4% |             −8.2% |            −8.8% |        −15.8% |
+| 1 GiB text, 64K                   |                −17.8% |             −5.3% |            −9.6% |        −15.7% |
+| 4 GiB text, 32K                   |                −16.1% |             −6.7% |           −10.3% |        −14.9% |
+
 ## Installation
 
 Use Python 3.10 or newer and a [Rust toolchain](https://rustup.rs) to build
@@ -193,6 +230,36 @@ assert tokenizer.decode(encoding.ids) == "Hi 빙고 🩷💚"
 
 A saved `tokenizer.json` loads with `Tokenizer.from_file`, like any other
 tokenizer.
+
+### Training a Unigram tokenizer
+
+The UBE pre-tokenizer, post-processor and decoder also work with the library's
+Unigram model. Pass the 512 base symbols as `initial_alphabet` to keep them all
+in the vocabulary, including symbols absent from the training corpus.
+
+```python
+from tokenizers import Tokenizer, decoders, models, pre_tokenizers, processors, trainers
+
+tokenizer = Tokenizer(models.Unigram())
+tokenizer.pre_tokenizer = pre_tokenizers.UniversalByteLevel(add_prefix_space=False, trim_offsets=False)
+tokenizer.post_processor = processors.UniversalByteLevel(trim_offsets=False)
+tokenizer.decoder = decoders.UniversalByteLevel()
+
+trainer = trainers.UnigramTrainer(
+    vocab_size=32000,
+    special_tokens=["<s>", "<pad>", "</s>", "<unk>", "<mask>"],
+    unk_token="<unk>",
+    initial_alphabet=pre_tokenizers.UniversalByteLevel.alphabet(),
+)
+tokenizer.train(["corpus.txt"], trainer)
+tokenizer.save("tokenizer.json")
+
+encoding = tokenizer.encode("Hi 빙고 🩷💚")
+assert tokenizer.decode(encoding.ids) == "Hi 빙고 🩷💚"
+```
+
+For FLORES-200 token counts of such tokenizers, see
+[Unigram tokenizers](#unigram-tokenizers).
 
 ### Decoding parts of a sequence
 
@@ -586,7 +653,7 @@ For UBE with byte-level models and boundary prediction, please also cite:
 This repository is a modified version of Hugging Face
 [`tokenizers`](https://github.com/huggingface/tokenizers). The Hugging Face code
 keeps its Apache License 2.0; see `LICENSE`. The UBE modifications and additions,
-including the `paper/` code, are Copyright 2026 Samsung Electronics Co., Ltd. and
+including the `paper/` and `experiments/` code, are Copyright 2026 Samsung Electronics Co., Ltd. and
 are licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0
 International License (CC BY-NC-SA 4.0); see `LICENSE-CC-BY-NC-SA-4.0`. `NOTICE` lists
 the added and modified files.
